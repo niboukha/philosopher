@@ -6,11 +6,17 @@
 /*   By: niboukha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:43:15 by niboukha          #+#    #+#             */
-/*   Updated: 2023/05/25 15:46:21 by niboukha         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:48:55 by niboukha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"philo.h"
+#include"philo_bonus.h"
+
+void	error_function(void)
+{
+	printf("Error\n");
+	exit(8);
+}
 
 int	ft_atoi(char *str)
 {
@@ -26,38 +32,25 @@ int	ft_atoi(char *str)
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
-			return (-1);
+			error_function();
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		result = result * 10 + str[i++] - 48;
 	if (str[i])
-		return (-1);
+		error_function();
 	return (result * sign);
 }
 
-int	print_error(void)
-{
-	printf("error\n");
-	return (0);
-}
-
-int	check_args(char **av, int ac)
+void	check_args(char **av, int ac)
 {
 	int	i;
 
 	i = 1;
 	while (i < 5 || (i < 6 && ac == 6))
 	{
-		if (ft_atoi(av[i]) == -1)
-		{
-			printf("error\n");
-			return (-1);
-		}
-		else
-			if (ft_atoi(av[i]) == 0)
-				return (-2);
+		if (ft_atoi(av[i]) == 0)
+			exit(1);
 		i++;
 	}
-	return (1);
 }
